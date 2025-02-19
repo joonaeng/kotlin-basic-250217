@@ -88,6 +88,114 @@ fun main() {
 //    }
 //    println("Day : $dayName")
 //    //when문은 자바의 switch 문을 대신하고 else는 기본적인 default 역할이다.
+
+//    val numbers = listOf(1, 2, 3, 4, 5, 6)
+//    val evenNumber = numbers.filter { it % 2 == 0 }
+//    println(evenNumber)
+//    //filter 함수를 사용해서 필터링 가능 내부 인자 = it
+
+//    val names = listOf("Alice", "Bob", "Charlie")
+//    val greetings = names.map { "Hello, $it" }
+//    greetings.forEach(::println)
+//    //코틀린에서는 기본적으로 map이 제공되어 mapping 가능하다
+
+//    val name: String? = null
+//    val displayName = name ?: "Guest"
+//    println("Hello, $displayName")
+//    //엘비스 연산자 ?: null인 경우 기본값을 제공할 수 있다.
+
+//    val obj: Any = "Hello"
+//    if (obj is String) {
+//        println(obj.length)
+//    }
+//    //is를 통해 자동 타입 캐스팅이 가능하다.
+
+//    //apply, let, also, run, with 같은 스코프 함수를 제공한다.
+//    val person = Person().apply {
+//        name = "Alice"
+//        age = 30
+//    }
+//    person.printInfo()
+//    //apply 객체를 생성한 후 내부 속성을 설정할 때 사용
+//    //마지막에 해당 객체 반환함, 객체 초기화에 유용하다
+
+//    val name: String? = null
+////    val name: String? = "Alice"
+//    name?.let {
+//        println("Length: ${it.length}")
+//    }
+//    //let은 null이 아닌 경우 특정 로직을 실행하는데 유용하다.
+//    //리턴값을 변환하여 새로운 값으로 사용할 수도 있습니다.
+//    //주로 안전호출 ?. 과 함께 사용된다.
+
+//    val message ="Hello".also {
+//        println("Before: $it")
+//    }.uppercase().also {
+//        println("After: $it")
+//    }
+//    //also는 객체를 유지하면서 추가적인 작업을 수행할 때 사용
+//    //로그출력이나 디버깅에 활용된다.
+
+//    val result = run {
+//        val x = 5
+//        x * 2 + 10
+//    }
+//    println("Result: $result")
+//    //run은 일회성 작업을 수행한 후 결과를 반환할 때 유용
+//    //객체 생성 없이 특정 블록 실행 가능
+
+//    val person = Person("Alice", 30, 55.0 ,50000.0)
+//    val info = with(person) {
+//        increaseAge(5)
+//        increaseWeight(3.5)
+//        increaseSalary(10000.0)
+//        getInfo()
+//    }
+//    println(info)
+//    //with는 객체를 컨텍스트로 가져와 여러작업을 수행한 후 결과를 반환합니다.
+//    //객체를 수정하는 점이 아니라 작업만 수행하는 점이 apply와 다르다.
+
+    //apply, also 객체 자체 반환
+    //let, run, with 람다 결과를 반환
+    //apply, run, with -> this 사용
+    //let, also -> it 사용
+
+//    val person = Person()
+//    person.apply { // 객체 자체 반환
+//        name = "Alice"
+//        age = 30
+//    }.also { // 객체 그대로 유지하면서 로깅 가능
+//        println("Created person: ${it.name}, ${it.age}")
+//    }.let { // 변환 가능 (여기서는 이름 길이 반환)
+//        it.name.length
+//    }.run { // 특정 연산 후 결과 반환
+//        this * 2
+//    }.also { println("Final result: $it") }
+//
+//    val personInfo = with(person) { // 객체 컨텍스트로 실행 후 결과 반환
+//        "Name: $name, Age: $age"
+//    }
+//    println(personInfo)
+
+//    val example = Example()
+//    //lateinit 초기화 없이 선언 가능 나중에 값을 할당
+//    example.value = "Hello, Kotlin!"
+//    //값 초기화 전에 접근하면 예외 발생
+//    example.printValue()
+
+//    println("Before accessing lazyValue")
+//    println(lazyValue) // 첫 호출 시 초기화
+//    //객체를 처음 사용할 때 초기화 됨 지연로딩
+//    println(lazyValue) // 이후에는 캐싱된 값 사용
+
+//    val example = Example()
+//    // lateinit 사용: 명시적으로 값 할당 후 사용
+//    example.name = "Alice"
+//    println("Name: ${example.name}")
+//    // lazy 사용: 최초 접근 시 초기화
+//    println("Before accessing lazyMessage")
+//    println(example.lazyMessage)
+//    println(example.lazyMessage) // 두 번째 호출은 초기화 없이 사용
 }
 
 //fun add(a : Int, b : Int) : Int {
@@ -126,3 +234,57 @@ fun main() {
 //    Files.copy(File(source).toPath(),File(target).toPath(), StandardCopyOption.REPLACE_EXISTING)
 //}
 ////throws 선언이 필요없이 예외처리를 할 수 있습니다.
+
+//class Person {
+//    var name: String = ""
+//    var age: Int = 0
+//
+//    fun printInfo() {
+//        println("$name is $age years old.")
+//    }
+//}
+
+//class Person(val name: String, var age: Int, var weight: Double, var salary: Double) {
+//    fun increaseAge(years: Int) {
+//        age += years
+//    }
+//
+//    fun increaseWeight(kg: Double) {
+//        weight += kg
+//    }
+//
+//    fun increaseSalary(amount: Double) {
+//        salary += amount
+//    }
+//
+//    fun getInfo() = "$name is $age years old, weights $weight kg, and earns $salary"
+//}
+//
+//class Person {
+//    var name: String = ""
+//    var age: Int = 0
+//}
+
+//class Example {
+//    lateinit var value: String
+//    //lateinit은 var에서 사용가능
+//    //null 허용 불가
+//    fun printValue() {
+//        println(value)
+//    }
+//}
+
+//val lazyValue: String by lazy {
+//    println("Initializing...") //최초 접근시 실행
+//    //lazy는 val에서 사용가능
+//    //한번만 초기화 됨
+//    "Hello, Lazy!"
+//}
+
+//class Example {
+//    lateinit var name: String
+//    val lazyMessage: String by lazy {
+//        println("Lazy value initialized!")
+//        "Hello, Lazy!"
+//    }
+//}
